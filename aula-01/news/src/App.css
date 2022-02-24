@@ -1,0 +1,12 @@
+.menu {
+  border: 1px solid #c6c6c6;
+}
+
+.noticia-bloco {
+  border: 1px solid #c6c6c6;
+  transition: all 0.7s;
+}
+
+.noticia-bloco:hover{
+  box-shadow: 2px 2px 2px black;
+}
