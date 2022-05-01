@@ -7,6 +7,7 @@ query getLogin($username:String!) {
       name
       password
       username
+      image
     }
   }
 `;

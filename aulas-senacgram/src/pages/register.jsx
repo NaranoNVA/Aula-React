@@ -24,9 +24,9 @@ const RegisterPage = () => {
         addLogin({ variables: { username, password: btoa(password), name } })
             .then(retorno => {
 
-                const { id, name, username } = retorno.data.insert_user.returning[0]
+                const { id, name, username, image } = retorno.data.insert_user.returning[0]
 
-                setCurrentUser({ id, name, username })
+                setCurrentUser({ id, name, username, image })
 
                 navigate('/')
 

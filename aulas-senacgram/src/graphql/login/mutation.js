@@ -7,8 +7,22 @@ mutation ADD_USER($name: String!, $password: String!, $username: String!) {
         id
         name
         username
+        image
       }
     }
   }
-  
+`;
+
+export const UPDATE_USER = gql`
+mutation MyMutation($name: String = "", $image: String = "", $id: uuid = "") {
+  update_user(_set: {name: $name, image: $image}, where: {id: {_eq: $id}}) {
+    returning {
+      id
+      name
+      password
+      username
+      image
+    }
+  }
+}
 `;

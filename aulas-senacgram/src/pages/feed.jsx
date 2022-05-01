@@ -2,12 +2,11 @@ import React from 'react';
 import Layout from '../components/shared/Layouts';
 import Post from '../components/feed/Post';
 import { useQuery } from '@apollo/client';
-import { GET_POSTS } from '../graphql/post/query';
+import { GET_POSTS, GET_POSTS_LIKES } from '../graphql/post/query';
 
 export default function FeedPage() {
-    const { loading, error, data } = useQuery(GET_POSTS);
+    const { loading, error, data } = useQuery(GET_POSTS_LIKES);
 
-    console.log(data);
 
     return (
     <>
@@ -18,7 +17,7 @@ export default function FeedPage() {
             <Layout>
                 <div className="row">
                     <div className="col-10 mx-auto">
-                        { data.post.map((post) => <Post key={1} post={post} />)}
+                        { data.post.map((post) => <Post key={post.id} post={post} />)}
                     </div>
                 </div>
             </Layout>

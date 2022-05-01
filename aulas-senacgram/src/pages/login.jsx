@@ -22,8 +22,8 @@ export default function LoginPage() {
                 const user = lazy.data.user[0]
 
                 if (user.password === btoa(password)) {
-                    const { username, name, id } = user
-                    setCurrentUser({ id, name, username })
+                    const { username, name, id, image } = user
+                    setCurrentUser({ id, name, username, image })
                     navigate('/')
 
                 }
