@@ -1,12 +1,20 @@
-import { Card, CardActions, CardContent, CardMedia, IconButton, Slider, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Card, CardActions, CardContent, CardMedia, IconButton, Slider, Typography, useMediaQuery } from "@mui/material";
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
+import QueueMusicIcon from '@mui/icons-material/QueueMusic';
 
 import React from "react";
 import FilaMusicas from "./FilaMusicas";
 
 export default function TocadorMusica(){
+    const telaGrande = useMediaQuery('(min-width:900px)');
+    const [expanded, setExpanded] = React.useState(false);
+
+    function handleChange(){
+      setExpanded(!expanded);
+    };
+
     return (
         <div>
             <Card style={{ display: 'flex', flexDirection : 'column' }} >
@@ -20,12 +28,28 @@ export default function TocadorMusica(){
                         <IconButton><PlayArrowIcon/></IconButton>
                         <IconButton><SkipNextIcon/></IconButton>
                         <Typography>00:30:12</Typography>
+                        {
+                            !telaGrande &&
+                            <IconButton onClick={() => handleChange()}><QueueMusicIcon/></IconButton>
+                        }
                     </CardActions>
                     <CardMedia image="https://www.jame-world.com/media/image/2021-03/11185.jpg" style={{ objectFit: 'cover', width: '120px', height: '120px' }}/>
                 </div>
                 <Slider type="range" min={0} ma={1} step={0.01} sx={{ width: '90%', m:'auto' }}></Slider>
             </Card>
-            <FilaMusicas />
+            {
+                telaGrande ?
+                <FilaMusicas /> 
+                :
+                <Accordion expanded={expanded} onChange={() =>  handleChange()} style={ !expanded ? { display: 'none', transition: 'all 1s ease' } : { transition: 'all 1s ease' }  }>
+                  <AccordionSummary aria-controls="filaMusicasbh-content"  id="filaMusicasbh-header" style={{ minHeight: '0px', height : '0px' }}>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <FilaMusicas /> 
+                  </AccordionDetails>
+                </Accordion>
+
+            }
         </div>
     )
 }

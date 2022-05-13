@@ -1,25 +1,28 @@
-import { Avatar, IconButton, Typography } from "@mui/material";
+import { Avatar, Card, CardContent, IconButton, Typography } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import React from "react";
 
 export default function FilaMusicas(){
     const musicaFake = {
+        id: 1,
         titulo: "Guh!",
         artista: "Calliope Mori",
-        imagem: "https://www.jame-world.com/media/image/2021-03/11185.jpg"
+        thumbnail: "https://www.jame-world.com/media/image/2021-03/11185.jpg",
+        url: "Kek",
+        duracao: 3.58
     }
 
     function MusicaFila( {musica} ){
-        const { titulo, imagem, artista } = musica;
+        const { titulo, thumbnail, artista } = musica;
         return (
-            <div style={{ display: 'grid', gridAutoFlow: 'column', gridTemplateColumns: '50px auto 50px', alignItems: 'center', margin: '10px' }}>
-                <Avatar src={imagem} alt="Capa do CD" style={{ width: '40px', height: '40px' }}></Avatar>
-                <div>
-                    <Typography variant="subtitle2">{titulo}</Typography>
-                    <Typography variant="body2">{artista}</Typography>
-                </div>
-                <IconButton><DeleteIcon color="error"/></IconButton>
-            </div>
+            <Card sx={{ display: 'grid', gridAutoFlow: 'column', gridTemplateColumns: '50px auto 50px', alignItems: 'center', my: 1, p: 1 }}>
+                    <Avatar src={thumbnail} alt="Capa do CD" style={{ width: '40px', height: '40px' }}></Avatar>
+                    <div>
+                        <Typography variant="subtitle2">{titulo}</Typography>
+                        <Typography variant="body2">{artista}</Typography>
+                    </div>
+                    <IconButton><DeleteIcon color="error"/></IconButton>
+            </Card>
         )
     }
 
