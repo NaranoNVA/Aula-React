@@ -2,11 +2,14 @@ import { Card, CardActions, CardContent, CardMedia, IconButton, Typography } fro
 import QueueMusicIcon from '@mui/icons-material/QueueMusic';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import React from "react";
-import { useQuery } from "@apollo/client";
-import { PEGAR_MUSICAS } from "../gralphql/query";
+import { useSubscription } from "@apollo/client";
+import { PEGAR_MUSICAS } from "../gralphql/subscriptions";
+import { MusicaContext } from "../App";
+import { PauseCircle } from "@mui/icons-material";
 
-export default function ListaMusicas(){
-    const { data, loading, error, refetch } = useQuery(PEGAR_MUSICAS);
+export default function ListaMusicas({fila}){
+    const { data, loading, error } = useSubscription(PEGAR_MUSICAS);
+    const { musicaAtual, musicaDispatch } = React.useContext(MusicaContext);
 
 
     if(loading){
@@ -26,6 +29,21 @@ export default function ListaMusicas(){
 
     function Musica( {musica} ){
         const { titulo, thumbnail, artista } = musica;
+        const [ isMusicaAtual, setIsMusicaAtual ] = React.useState(false);
+
+        React.useEffect(() => {
+            setIsMusicaAtual(musicaAtual.musica.id == musica.id && musicaAtual.estaTocando)
+        },[musicaAtual.musica.id, musicaAtual.estaTocando]);
+
+        function handleMudarMusica() {
+            musicaDispatch({ type: "MUDAR_MUSICA", payload: { musica } });
+            musicaDispatch({ type: isMusicaAtual ? "PAUSAR_MUSICA" : "TOCAR_MUSICA"});
+        }
+
+        function handleAdicionarFila(){
+            fila.filaAtualDispatch({ type: "ADICIONAR_FILA", payload: { musica } });
+        }
+
         return (
             <Card style={{ display: 'flex', alignItems : 'center' }} sx={{ my:1 }}>
                 <CardMedia image={thumbnail} style={{ objectFit: 'cover', width: '120px', height: '120px' }}/>
@@ -35,8 +53,12 @@ export default function ListaMusicas(){
                         <Typography variant="subtitle1" component="h3">{artista}</Typography>
                     </CardContent>
                     <CardActions>
-                        <IconButton ><PlayCircleIcon color="primary"/></IconButton>
-                        <IconButton ><QueueMusicIcon color="primary"/></IconButton>
+                        <IconButton onClick={handleMudarMusica}>
+                            {  isMusicaAtual ? <PauseCircle color="primary"/> :<PlayCircleIcon color="primary"/> }
+                        </IconButton>
+                        <IconButton onClick={handleAdicionarFila}>
+                            <QueueMusicIcon color="primary"/>
+                        </IconButton>
                     </CardActions>
                 </div>
             </Card>
