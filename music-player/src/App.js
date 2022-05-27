@@ -1,5 +1,5 @@
 
-import React, { Context, useContext } from "react";
+import React from "react";
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from "./temas/tema";
 import AdicionarMusica from "./components/AdicionarMusica";

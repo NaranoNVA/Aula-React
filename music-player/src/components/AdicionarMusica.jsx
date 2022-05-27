@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import React from "react";
 import YouTubePlayer from "react-player/youtube";
@@ -77,7 +77,7 @@ export default function AdicionarMusica(){
             <Dialog open={dialog}>
                 <DialogTitle>Editar Música</DialogTitle>
                 <DialogContent style={{ textAlign: "center" }}>
-                    <img src={musica.thumbnail} style={{ width: '90%' }}/>
+                    <img src={musica.thumbnail} style={{ width: '90%' }} alt="Imagem da música"/>
                     <TextField name="titulo" onChange={handleEditDataMusica} sx={{ mt: 1 }} variant="outlined" label="Nome da Música" value={musica.titulo} fullWidth></TextField>
                     <TextField name="artista" onChange={handleEditDataMusica} sx={{ mt: 1 }} variant="outlined" label="Nome do Artista" value={musica.artista} fullWidth></TextField>
                     <TextField name="thumbnail" onChange={handleEditDataMusica} sx={{ mt: 1 }} variant="outlined" label="Imagem" value={musica.thumbnail} fullWidth></TextField>

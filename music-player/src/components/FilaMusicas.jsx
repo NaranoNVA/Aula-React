@@ -1,17 +1,8 @@
-import { Avatar, Card, CardContent, IconButton, Typography } from "@mui/material";
+import { Avatar, Card, IconButton, Typography } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import React from "react";
 
 export default function FilaMusicas({ fila }){
-    const musicaFake = {
-        id: 1,
-        titulo: "Guh!",
-        artista: "Calliope Mori",
-        thumbnail: "https://www.jame-world.com/media/image/2021-03/11185.jpg",
-        url: "Kek",
-        duracao: 3.58
-    }
-
     function MusicaFila( {musica} ){
         const { titulo, thumbnail, artista } = musica;
         

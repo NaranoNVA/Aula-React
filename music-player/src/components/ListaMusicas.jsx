@@ -32,8 +32,8 @@ export default function ListaMusicas({fila}){
         const [ isMusicaAtual, setIsMusicaAtual ] = React.useState(false);
 
         React.useEffect(() => {
-            setIsMusicaAtual(musicaAtual.musica.id == musica.id && musicaAtual.estaTocando)
-        },[musicaAtual.musica.id, musicaAtual.estaTocando]);
+            setIsMusicaAtual(musicaAtual.musica.id === musica.id && musicaAtual.estaTocando)
+        },[musica.id]);
 
         function handleMudarMusica() {
             musicaDispatch({ type: "MUDAR_MUSICA", payload: { musica } });
